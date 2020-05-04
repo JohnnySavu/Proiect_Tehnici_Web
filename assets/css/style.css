@@ -95,6 +95,7 @@ header{
     height:40px;
     text-align:center;
     opacity:0.8;
+    border-radius:20px;
 }
 
 .submit-button{
@@ -121,7 +122,7 @@ header{
 .car{
     margin:5px;
     display:grid;
-    grid-template-rows: 35%;
+    grid-template-rows: fit-content(35%)  55% 10%;
     height:400px;
     background-color:rgb(241, 250, 238, 0.8);
 }
@@ -136,6 +137,8 @@ header{
 }
 
 .desc-produs{
+    max-width: 100%;
+    max-height: 100%;
     text-align:center;
     text-justify:center;
 }
@@ -181,7 +184,7 @@ header{
     .car{
         margin:5px;
         display:grid;
-        grid-template-rows: 35%;
+        grid-template-rows: fit-content(35%)  55% 10%;
         height:500px;
         background-color:rgb(241, 250, 238, 0.8);
     }
@@ -194,7 +197,7 @@ header{
     .car{
         margin:5px;
         display:grid;
-        grid-template-rows: 35%;
+        grid-template-rows: fit-content(35%)  55% 10%;
         height:600px;
         background-color:rgb(241, 250, 238, 0.8);
     }
@@ -213,4 +216,32 @@ header{
         display:grid;
         grid-template-columns: 1fr;
     }
+}
+
+.add-img{
+    
+    max-width:100%;
+    max-height:100%;
+    vertical-align:middle;
+}
+
+.add-car{
+    margin:5px;
+    display:grid;
+    grid-template-rows: fit-content(45%)  1fr 10%;
+    height:800px;
+    background-color:rgb(241, 250, 238, 0.4);
+}
+
+.add-poza-titlu{
+    display:grid;
+    grid-template-columns: 50% 50%;
+}
+
+.add-input{
+    width:80%;
+    height:40px;
+    text-align:center;
+    opacity:0.8;
+    border-radius:20px;
 }
