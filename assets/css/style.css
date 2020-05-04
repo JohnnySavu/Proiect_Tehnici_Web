@@ -194,6 +194,11 @@ header{
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
+    .add-poza-titlu{
+        display:grid;
+        grid-template-columns: 1fr;
+        grid-template-rows:1fr 1fr;
+    }
     .car{
         margin:5px;
         display:grid;
@@ -229,7 +234,6 @@ header{
     margin:5px;
     display:grid;
     grid-template-rows: fit-content(45%)  1fr 10%;
-    height:800px;
     background-color:rgb(241, 250, 238, 0.4);
 }
 
@@ -244,4 +248,15 @@ header{
     text-align:center;
     opacity:0.8;
     border-radius:20px;
+}
+
+.add-car-btn{
+    height:50px;
+}
+
+.add-input-desc{
+    text-justify: initial;
+    width:99%;
+    opacity:0.8;
+    height:auto;
 }
