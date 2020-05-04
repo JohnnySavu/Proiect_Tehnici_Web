@@ -79,6 +79,7 @@ header{
     background-color: rgb(241, 250, 238, 0.6);   
     display:gird;
     grid-template-rows: 1fr; 
+    border-radius:12px;
 }
 
 .main-div{
@@ -117,17 +118,21 @@ header{
     background-color: rgb(241, 250, 238, 0.6);   
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
-}
+    border-radius:12px;
+
+}   
 
 .car{
-    margin:5px;
+    margin:10px;
     display:grid;
     grid-template-rows: fit-content(35%)  55% 10%;
     height:400px;
     background-color:rgb(241, 250, 238, 0.8);
+    border-radius:12px;
 }
 
 .poza-titlu{
+    margin-top:5px;
     display:grid;
     grid-template-columns: 50% 50%;
 }
@@ -233,7 +238,7 @@ header{
 .add-car{
     margin:5px;
     display:grid;
-    grid-template-rows: fit-content(45%)  1fr 10%;
+    grid-template-rows: fit-content(45%)  1fr fit-content(10%);
     background-color:rgb(241, 250, 238, 0.4);
 }
 
@@ -257,6 +262,13 @@ header{
 .add-input-desc{
     text-justify: initial;
     width:99%;
-    opacity:0.8;
+    opacity:0.6;
     height:auto;
+}
+
+.btn-buy{
+    border-radius:12px;
+    margin-bottom:5px;
+    cursor:pointer;
+    background-color:#BFC9D0;
 }
