@@ -3,6 +3,12 @@ document.getElementById("log-in-btn").addEventListener("click", goLogIn);
 document.getElementById("search-cars-btn").addEventListener("click", goSearchCars);
 document.getElementById("add-cars-btn").addEventListener("click", goAddCars);
 localStorage.setItem("onSearch", "false");
+btn = document.getElementById("modify-list-btn");
+
+function goModifiy()
+{
+    
+}
 
 
 function goLogIn(){
@@ -147,7 +153,7 @@ function goSearchCars(){
 
                 let div_descriere = document.createElement("div");
                 div_descriere.className = "descriere";
-                div_descriere.innerText = "Description: " + cars[i].description;
+                div_descriere.innerText = cars[i].description;
 
                 let btn = document.createElement("button");
                 btn.className = "btn-buy";

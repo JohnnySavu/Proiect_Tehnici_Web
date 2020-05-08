@@ -43,14 +43,14 @@ header{
 
 .nav-button {
   background-color: #f1faee;
-  width:150px;
+  width:120px;
   border: none;
   color: black;
   padding: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   margin: 4px 2px;
   border-radius : 12px;
   cursor:pointer;
@@ -251,8 +251,9 @@ header{
 .add-car{
     margin:5px;
     display:grid;
-    grid-template-rows: fit-content(45%)  1fr fit-content(10%);
+    grid-template-rows: fit-content(45%)  fit-content(1fr) 40px;
     background-color:rgb(241, 250, 238, 0.4);
+    border-radius:12px;
 }
 
 .add-poza-titlu{
@@ -270,6 +271,9 @@ header{
 
 .add-car-btn{
     height:50px;
+    border-radius:12px;
+    cursor:pointer;
+    background-color:#BFC9D0;
 }
 
 .add-input-desc{
