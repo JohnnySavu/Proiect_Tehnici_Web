@@ -256,6 +256,14 @@ header{
     border-radius:12px;
 }
 
+.update-car{
+    margin:5px;
+    display:grid;
+    grid-template-rows: fit-content(45%)  fit-content(1fr) 40px 40px;
+    background-color:rgb(241, 250, 238, 0.4);
+    border-radius:12px;
+}
+
 .add-poza-titlu{
     display:grid;
     grid-template-columns: 50% 50%;
