@@ -5,6 +5,8 @@ document.getElementById("add-cars-btn").addEventListener("click", goAddCars);
 localStorage.setItem("onSearch", "false");
 btn = document.getElementById("modify-list-btn");
 
+
+
 document.addEventListener('click',function(e)
 {
     if(e.target && e.target.id == 'modify-list-btn')
@@ -13,7 +15,7 @@ document.addEventListener('click',function(e)
     }
 });
 
-
+//aici modific lista
 function modifyItem(car)
 {
     localStorage.setItem("onSearch", "false");
@@ -22,7 +24,7 @@ function modifyItem(car)
     <div class='add-car'>
         <div class = 'add-poza-titlu'>
             <div class ='desc-produs'>
-                <img class = 'img' alt='Car' src='./img/add-car.jpg'>
+                <img class = 'img' id ='display-car' alt='Car' src='./img/add-car.jpg'>
             </div>
             <form>
                 <br>
@@ -58,7 +60,47 @@ function modifyItem(car)
     </div>
 </main>
     `;
+    
+    document.getElementById("display-car").src = car.img;
+    document.getElementById("car_name").value = car.name;
+    document.getElementById("price").value = car.price;
+    document.getElementById("Image").value = car.img;
+    document.getElementById("car-desc").value = car.description;
+    //aici modific elementul
+    document.getElementById('modify-car-btn').addEventListener('click',function()
+    {
+        const Obj = 
+        {
+            name: document.getElementById("car_name").value,
+            price: document.getElementById("price").value,
+            description:document.getElementById("car-desc").value,
+            img:document.getElementById("Image").value,
+            id:car.id
+        }
+        console.log(car.id);
+        fetch(`http://localhost:3000/cars/${car.id}`, {
+            method: 'PUT',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(Obj)
+        }).then(function () {
+        goModifiy();
+    });
 
+
+    });
+    //aici sterg elementul
+    document.getElementById("delete-car-btn").addEventListener('click',function()
+    {
+        console.log(car.id);
+        fetch(`http://localhost:3000/cars/${car.id}`, {
+        method: 'DELETE',
+    }).then(function () {
+        //console.log(response);
+        goModifiy();
+    }); 
+    });
 
 }
 
@@ -129,7 +171,6 @@ function goModifiy()
                 btn.innerText = "Modify it!";
                 btn.addEventListener('click', function () {
                     modifyItem(cars[i]); // de pus functia de steregere 
-
                 });
 
                 div_id.appendChild(div_poz_titlu);
@@ -229,6 +270,56 @@ function goAddCars(){
 
 }
 
+function buyCars(car)
+{
+    localStorage.setItem("onSearch", "false");
+    main = document.getElementById('main-section');
+    main.innerHTML =`<main class = 'main-div'>
+    <div class='add-car'>
+        <div class = 'add-poza-titlu'>
+            <div class ='desc-produs'>
+                <img class = 'img' id ='display-car' alt='Car' src='./img/add-car.jpg'>
+            </div>
+            <form>
+                <br>
+                <label for="Car name">Car name</label><br>
+                <input class='add-input' type="text" id="car_name" name="Car name" placeholder="Car name"><br>
+    
+                <label for="Price">Price</label><br>
+                <input class='add-input' type="text" id="price" name="Price" placeholder="Price"><br>
+                <label for="Image">Image link</label><br>
+                <input class='add-input' type="text" id="Image" name="Image" placeholder="Image link"><br>
+                
+            </form>
+        </div>
+
+        <div class = 'descriere'>
+           <h3>
+               Add description:
+           </h3>
+           <form>
+            <textarea name="message" id = 'car-desc' class='add-input-desc' rows="20" cols="150"></textarea>
+           </form>
+           <br>
+
+        </div>
+
+        <button type='button' class='add-car-btn' id = 'modify-car-btn'>
+            Buy the car!
+        </button>
+
+    </div>
+</main>
+    `;
+    
+    document.getElementById("display-car").src = car.img;
+    document.getElementById("car_name").value = car.name;
+    document.getElementById("price").value = car.price;
+    document.getElementById("Image").value = car.img;
+    document.getElementById("car-desc").value = car.description;
+
+}
+
 // display cars to the list 
 function goSearchCars(){
     
@@ -297,11 +388,15 @@ function goSearchCars(){
                 let btn = document.createElement("button");
                 btn.className = "btn-buy";
                 btn.type = "button";
-                btn.innerText = "Buy it!";
+                btn.innerText = "Details";
 
                 div_id.appendChild(div_poz_titlu);
                 div_id.appendChild(div_descriere);
                 div_id.appendChild(btn);
+                
+                btn.addEventListener('click', function () {
+                    buyCars(cars[i]); // de pus functia de steregere 
+                });
 
                 main_div.appendChild(div_id);
 
@@ -350,3 +445,38 @@ function goHome(){
 </main>`;
 }
 
+
+document.addEventListener('click',function(e)
+{
+    if(e.target && e.target.id == 'add-car-btn')
+    {
+        carName = document.getElementById("car_name").value;
+        price = document.getElementById("price").value;
+        imgLink = document.getElementById("Image").value;
+        carDesc = document.getElementById("car-desc").value;
+        obj = {
+            name: carName,
+            price: price,
+            description: carDesc,
+            img: imgLink
+        }
+        postCar(obj);
+    }
+});
+
+function postCar(postObject)
+{
+
+    fetch('http://localhost:3000/cars', {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(postObject)
+    }).then(function () {
+        localStorage.setItem("onSearch", "false");
+        goSearchCars();
+    });
+
+
+}

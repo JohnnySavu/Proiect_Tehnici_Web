@@ -147,6 +147,7 @@ header{
 .descriere{
     margin:3px;
     font-size: 22px;
+    overflow:auto;
 }
 
 .desc-produs{

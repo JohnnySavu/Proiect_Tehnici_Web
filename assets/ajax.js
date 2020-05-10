@@ -34,6 +34,7 @@ function postCar(postObject)
         document.getElementById("price").value = "";
         document.getElementById("Image").value = "";
         document.getElementById("car-desc").value = "";
+        
         //de adaugat move to search cars 
     });
 

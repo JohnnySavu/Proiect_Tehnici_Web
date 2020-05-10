@@ -1,0 +1,117 @@
+// Import packages
+const express = require("express");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const uuidv1 = require('uuid/v1');
+
+const fs = require("fs");
+
+// Aplicatia
+const app = express();
+
+// Middleware
+app.use(morgan("tiny"));
+app.use(bodyParser.json());
+app.use(cors());
+
+// Create
+app.post("/cars", (req, res) => {
+  const carsList = readJSONFile();
+  const newCar = req.body;
+  newCar.id = uuidv1();
+  const newCarList = [...carsList, newCar];
+  writeJSONFile(newCarList);
+  res.json(newCar);
+});
+
+// Read One
+app.get("/cars/:id", (req, res) => {
+  const carsList = readJSONFile();
+  const id = req.params.id;
+  let idFound = false;
+  let foundCar;
+
+  carsList.forEach(car => {
+    if (id === car.id) {
+      idFound = true;
+      foundCar = car
+    }
+  });
+
+  if (idFound) {
+    res.json(foundCar);
+  } else {
+    res.status(404).send(`Car ${id} was not found`);
+  }
+});
+
+// Read All
+app.get("/cars", (req, res) => {
+  const carsList = readJSONFile();
+  res.json(carsList);
+});
+
+// Update
+app.put("/cars/:id", (req, res) => {
+  const carsList = readJSONFile();
+  const id = req.params.id;
+  const newCar = req.body;
+  newCar.id = id;
+  idFound = false;
+
+  const newCarList = carsList.map((car) => {
+     if (car.id === id) {
+       idFound = true;
+       return newCar;
+     }
+    return car;
+  })
+  
+  writeJSONFile(newCarList);
+
+  if (idFound) {
+    res.json(newCar);
+  } else {
+    res.status(404).send(`Car ${id} was not found`);
+  }
+
+});
+
+// Delete
+app.delete("/cars/:id", (req, res) => {
+  const carsList = readJSONFile();
+  const id = req.params.id;
+  const newCarList = carsList.filter((car) => car.id !== id)
+
+  if (carsList.length !== newCarList.length) {
+    res.status(200).send(`Car ${id} was removed`);
+    writeJSONFile(newCarList);
+  } else {
+    res.status(404).send(`Car ${id} was not found`);
+  }
+});
+
+// Functia de citire din fisierul db.json
+function readJSONFile() {
+  return JSON.parse(fs.readFileSync("db.json"))["cars"];
+}
+
+// Functia de scriere in fisierul db.json
+function writeJSONFile(content) {
+  fs.writeFileSync(
+    "db.json",
+    JSON.stringify({ cars: content }),
+    "utf8",
+    err => {
+      if (err) {
+        console.log(err);
+      }
+    }
+  );
+}
+
+// Pornim server-ul
+app.listen("3000", () =>
+  console.log("Server started at: http://localhost:3000")
+);
