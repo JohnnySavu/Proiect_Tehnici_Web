@@ -1,41 +1,41 @@
 
 
-//post a car in the list!
+//post a book in the list!
 
 document.addEventListener('click',function(e)
 {
-    if(e.target && e.target.id == 'add-car-btn')
+    if(e.target && e.target.id == 'add-book-btn')
     {
-        carName = document.getElementById("car_name").value;
+        bookName = document.getElementById("book_name").value;
         price = document.getElementById("price").value;
         imgLink = document.getElementById("Image").value;
-        carDesc = document.getElementById("car-desc").value;
+        bookDesc = document.getElementById("book-desc").value;
         obj = {
-            name: carName,
+            name: bookName,
             price: price,
-            description: carDesc,
+            description: bookDesc,
             img: imgLink
         }
-        postCar(obj);
+        postbook(obj);
     }
 });
 
-function postCar(postObject)
+function postbook(postObject)
 {
 
-    fetch('http://localhost:3000/cars', {
+    fetch('http://localhost:3000/books', {
         method: 'post',
         headers: {
             "Content-type": "application/json"
         },
         body: JSON.stringify(postObject)
     }).then(function () {
-        document.getElementById("car_name").value = "";
+        document.getElementById("book_name").value = "";
         document.getElementById("price").value = "";
         document.getElementById("Image").value = "";
-        document.getElementById("car-desc").value = "";
+        document.getElementById("book-desc").value = "";
         
-        //de adaugat move to search cars 
+        //de adaugat move to search books 
     });
 
 }
@@ -46,16 +46,16 @@ function postCar(postObject)
 
 /*
 
-var addCarBtn = null;
+var addbookBtn = null;
 if (document.getElementById('main-div'))
 {
     console.log("binie");
-    addCarBtn = document.getElementById('main-div');
-    addCarBtn.addEventListener('click', works);
+    addbookBtn = document.getElementById('main-div');
+    addbookBtn.addEventListener('click', works);
 }
 else
 {
-    addCarBtn = null;
+    addbookBtn = null;
 }
 
 function works()

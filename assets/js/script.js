@@ -1,9 +1,11 @@
 document.getElementById("home-btn").addEventListener("click", goHome);
 document.getElementById("log-in-btn").addEventListener("click", goLogIn);
-document.getElementById("search-cars-btn").addEventListener("click", goSearchCars);
-document.getElementById("add-cars-btn").addEventListener("click", goAddCars);
+document.getElementById("search-books-btn").addEventListener("click", goSearchbooks);
+
 localStorage.setItem("onSearch", "false");
 btn = document.getElementById("modify-list-btn");
+localStorage.setItem("admin", "false");
+localStorage.setItem("loged","false");
 
 
 
@@ -16,20 +18,20 @@ document.addEventListener('click',function(e)
 });
 
 //aici modific lista
-function modifyItem(car)
+function modifyItem(book)
 {
     localStorage.setItem("onSearch", "false");
     main = document.getElementById('main-section');
     main.innerHTML =`<main class = 'main-div'>
-    <div class='add-car'>
+    <div class='add-book'>
         <div class = 'add-poza-titlu'>
             <div class ='desc-produs'>
-                <img class = 'img' id ='display-car' alt='Car' src='./img/add-car.jpg'>
+                <img class = 'img' id ='display-book' alt='book' src='./img/add-book.jpg'>
             </div>
             <form>
                 <br>
-                <label for="Car name">Car name</label><br>
-                <input class='add-input' type="text" id="car_name" name="Car name" placeholder="Car name"><br>
+                <label for="book name">book name</label><br>
+                <input class='add-input' type="text" id="book_name" name="book name" placeholder="book name"><br>
     
                 <label for="Price">Price</label><br>
                 <input class='add-input' type="text" id="price" name="Price" placeholder="Price"><br>
@@ -44,41 +46,41 @@ function modifyItem(car)
                Add description:
            </h3>
            <form>
-            <textarea name="message" id = 'car-desc' class='add-input-desc' rows="20" cols="150"></textarea>
+            <textarea name="message" id = 'book-desc' class='add-input-desc' rows="20" cols="150"></textarea>
            </form>
            <br>
 
         </div>
 
-        <button type='button' class='add-car-btn' id = 'modify-car-btn'>
-            Modify the car!
+        <button type='button' class='add-book-btn' id = 'modify-book-btn'>
+            Modify the book!
         </button>
         
-        <button type='button' class='add-car-btn' id = 'delete-car-btn'>
-            Delete the car!
+        <button type='button' class='add-book-btn' id = 'delete-book-btn'>
+            Delete the book!
         </button>
     </div>
 </main>
     `;
     
-    document.getElementById("display-car").src = car.img;
-    document.getElementById("car_name").value = car.name;
-    document.getElementById("price").value = car.price;
-    document.getElementById("Image").value = car.img;
-    document.getElementById("car-desc").value = car.description;
+    document.getElementById("display-book").src = book.img;
+    document.getElementById("book_name").value = book.name;
+    document.getElementById("price").value = book.price;
+    document.getElementById("Image").value = book.img;
+    document.getElementById("book-desc").value = book.description;
     //aici modific elementul
-    document.getElementById('modify-car-btn').addEventListener('click',function()
+    document.getElementById('modify-book-btn').addEventListener('click',function()
     {
         const Obj = 
         {
-            name: document.getElementById("car_name").value,
+            name: document.getElementById("book_name").value,
             price: document.getElementById("price").value,
-            description:document.getElementById("car-desc").value,
+            description:document.getElementById("book-desc").value,
             img:document.getElementById("Image").value,
-            id:car.id
+            id:book.id
         }
-        console.log(car.id);
-        fetch(`http://localhost:3000/cars/${car.id}`, {
+        console.log(book.id);
+        fetch(`http://localhost:3000/books/${book.id}`, {
             method: 'PUT',
             headers: {
                 "Content-type": "application/json"
@@ -91,10 +93,10 @@ function modifyItem(car)
 
     });
     //aici sterg elementul
-    document.getElementById("delete-car-btn").addEventListener('click',function()
+    document.getElementById("delete-book-btn").addEventListener('click',function()
     {
-        console.log(car.id);
-        fetch(`http://localhost:3000/cars/${car.id}`, {
+        console.log(book.id);
+        fetch(`http://localhost:3000/books/${book.id}`, {
         method: 'DELETE',
     }).then(function () {
         //console.log(response);
@@ -121,15 +123,15 @@ function goModifiy()
     //let main = document.getElementById('main-div-search');
     //while(main.firstChild)
         //main.removeChild(main.firstChild);
-    fetch('http://localhost:3000/cars')
+    fetch('http://localhost:3000/books')
     .then(function (response) {
         // Trasform server response to get the dogs
-        response.json().then(function (cars) {
-            for(let i = 0; i < cars.length; i++)
+        response.json().then(function (books) {
+            for(let i = 0; i < books.length; i++)
             {
                 let div_id = document.createElement("div");
-                div_id.id = cars[i].id;
-                div_id.className = 'car';
+                div_id.id = books[i].id;
+                div_id.className = 'book';
 
                 let div_poz_titlu = document.createElement("div");
                 div_poz_titlu.className = 'poza-titlu';
@@ -139,8 +141,8 @@ function goModifiy()
                 
                 let img = document.createElement("img");
                 img.className = 'img';
-                img.alt = 'Car'
-                img.src = cars[i].img;
+                img.alt = 'book'
+                img.src = books[i].img;
                 
                 div_desc.appendChild(img);
                 
@@ -149,11 +151,11 @@ function goModifiy()
 
                 let h3 = document.createElement("p");
                 h3.className = 'titlu';
-                h3.innerText = cars[i].name;
+                h3.innerText = books[i].name;
 
                 let h4 = document.createElement("p");
                 h4.className = 'pret';
-                h4.innerText = cars[i].price;
+                h4.innerText = books[i].price;
 
                 div_titlu_pret.appendChild(h3);
                 div_titlu_pret.appendChild(h4);
@@ -162,7 +164,7 @@ function goModifiy()
 
                 let div_descriere = document.createElement("div");
                 div_descriere.className = "descriere";
-                div_descriere.innerText = cars[i].description;
+                div_descriere.innerText = books[i].description;
 
                 let btn = document.createElement("button");
                 btn.className = "btn-buy";
@@ -170,7 +172,7 @@ function goModifiy()
                 btn.id = "modify"
                 btn.innerText = "Modify it!";
                 btn.addEventListener('click', function () {
-                    modifyItem(cars[i]); // de pus functia de steregere 
+                    modifyItem(books[i]); // de pus functia de steregere 
                 });
 
                 div_id.appendChild(div_poz_titlu);
@@ -201,7 +203,7 @@ function goLogIn(){
             <label for="password">Passowrd</label><br>
             <input class='input' type="password" id="password" name="password" placeholder="password"><br>
             <br>
-            <input type="submit" value="Log in" id='submit-log-in' class="submit-button">
+            <input  value="Log in" id='submit-log-in' class="submit-button">
             
             <h1 class = 'sing-up-header'>Don't have an account? Sign up!</h1>
             <label for="username2">User name</label><br>
@@ -220,7 +222,7 @@ function goLogIn(){
             <input class='input' type="password" id="password2c"  name="password2c" placeholder="confirm password"><br>
             <br>
 
-            <input type="submit" value="Sign up" id='submit-sign-up' class="submit-button">
+            <input value="Sign up" id='submit-sign-up' class="submit-button">
             <br>
         </form>
         <br>       
@@ -228,100 +230,10 @@ function goLogIn(){
     `;
 }
 
-function goAddCars(){
-    localStorage.setItem("onSearch", "false");
-    main = document.getElementById('main-section');
-    main.innerHTML =`<main class = 'main-div'>
-    <div class='add-car'>
-        <div class = 'add-poza-titlu'>
-            <div class ='desc-produs'>
-                <img class = 'img' alt='Car' src='./img/add-car.jpg'>
-            </div>
-            <form>
-                <br>
-                <label for="Car name">Car name</label><br>
-                <input class='add-input' type="text" id="car_name" name="Car name" placeholder="Car name"><br>
-    
-                <label for="Price">Price</label><br>
-                <input class='add-input' type="text" id="price" name="Price" placeholder="Price"><br>
-                <label for="Image">Image link</label><br>
-                <input class='add-input' type="text" id="Image" name="Image" placeholder="Image link"><br>
-                
-            </form>
-        </div>
 
-        <div class = 'descriere'>
-           <h3>
-               Add description:
-           </h3>
-           <form>
-            <textarea name="message" id = 'car-desc' class='add-input-desc' rows="20" cols="150"></textarea>
-           </form>
-           <br>
 
-        </div>
-        
-        <button type='button' class='add-car-btn' id = 'add-car-btn'>
-            Add the car!
-        </button>
-    </div>
-</main>
-    `;
-
-}
-
-function buyCars(car)
-{
-    localStorage.setItem("onSearch", "false");
-    main = document.getElementById('main-section');
-    main.innerHTML =`<main class = 'main-div'>
-    <div class='add-car'>
-        <div class = 'add-poza-titlu'>
-            <div class ='desc-produs'>
-                <img class = 'img' id ='display-car' alt='Car' src='./img/add-car.jpg'>
-            </div>
-            <form>
-                <br>
-                <label for="Car name">Car name</label><br>
-                <input class='add-input' type="text" id="car_name" name="Car name" placeholder="Car name"><br>
-    
-                <label for="Price">Price</label><br>
-                <input class='add-input' type="text" id="price" name="Price" placeholder="Price"><br>
-                <label for="Image">Image link</label><br>
-                <input class='add-input' type="text" id="Image" name="Image" placeholder="Image link"><br>
-                
-            </form>
-        </div>
-
-        <div class = 'descriere'>
-           <h3>
-               Add description:
-           </h3>
-           <form>
-            <textarea name="message" id = 'car-desc' class='add-input-desc' rows="20" cols="150"></textarea>
-           </form>
-           <br>
-
-        </div>
-
-        <button type='button' class='add-car-btn' id = 'modify-car-btn'>
-            Buy the car!
-        </button>
-
-    </div>
-</main>
-    `;
-    
-    document.getElementById("display-car").src = car.img;
-    document.getElementById("car_name").value = car.name;
-    document.getElementById("price").value = car.price;
-    document.getElementById("Image").value = car.img;
-    document.getElementById("car-desc").value = car.description;
-
-}
-
-// display cars to the list 
-function goSearchCars(){
+// display books to the list 
+function goSearchbooks(){
     
     //if we try to reload the list but there is no need to, abort
     if(localStorage.getItem("onSearch") == 'true')
@@ -342,15 +254,15 @@ function goSearchCars(){
     //let main = document.getElementById('main-div-search');
     //while(main.firstChild)
         //main.removeChild(main.firstChild);
-    fetch('http://localhost:3000/cars')
+    fetch('http://localhost:3000/books')
     .then(function (response) {
         // Trasform server response to get the dogs
-        response.json().then(function (cars) {
-            for(let i = 0; i < cars.length; i++)
+        response.json().then(function (books) {
+            for(let i = 0; i < books.length; i++)
             {
                 let div_id = document.createElement("div");
-                div_id.id = cars[i].id;
-                div_id.className = 'car';
+                div_id.id = books[i].id;
+                div_id.className = 'book';
 
                 let div_poz_titlu = document.createElement("div");
                 div_poz_titlu.className = 'poza-titlu';
@@ -360,8 +272,8 @@ function goSearchCars(){
                 
                 let img = document.createElement("img");
                 img.className = 'img';
-                img.alt = 'Car'
-                img.src = cars[i].img;
+                img.alt = 'book'
+                img.src = books[i].img;
                 
                 div_desc.appendChild(img);
                 
@@ -370,11 +282,11 @@ function goSearchCars(){
 
                 let h3 = document.createElement("p");
                 h3.className = 'titlu';
-                h3.innerText = cars[i].name;
+                h3.innerText = books[i].name;
 
                 let h4 = document.createElement("p");
                 h4.className = 'pret';
-                h4.innerText = cars[i].price;
+                h4.innerText = books[i].price;
 
                 div_titlu_pret.appendChild(h3);
                 div_titlu_pret.appendChild(h4);
@@ -383,7 +295,7 @@ function goSearchCars(){
 
                 let div_descriere = document.createElement("div");
                 div_descriere.className = "descriere";
-                div_descriere.innerText = cars[i].description;
+                div_descriere.innerText = "Author: " + books[i].author + "\n Description: " + books[i].description;
 
                 let btn = document.createElement("button");
                 btn.className = "btn-buy";
@@ -395,7 +307,7 @@ function goSearchCars(){
                 div_id.appendChild(btn);
                 
                 btn.addEventListener('click', function () {
-                    buyCars(cars[i]); // de pus functia de steregere 
+                    buybooks(books[i]); // de pus functia de steregere 
                 });
 
                 main_div.appendChild(div_id);
@@ -409,10 +321,10 @@ function goSearchCars(){
 /*
 
     mainSection.innerHTML = `<main class = 'main-div-search' id = 'main-div-search'>
-    <div id = '1' class='car'>
+    <div id = '1' class='book'>
                 <div class = 'poza-titlu'>
                     <div class ='desc-produs'>
-                        <img class = 'img' alt='Car'  src='./img/car1.jpg'>
+                        <img class = 'img' alt='book'  src='./img/book1.jpg'>
                     </div>
                     <div class = 'tilu-pret'>
                         <h3 class='titlu'>
@@ -439,44 +351,29 @@ function goSearchCars(){
 }
 
 function goHome(){
+    console.log("ayy");
     localStorage.setItem("onSearch", "false");
     main = document.getElementById('main-section');
-    main.innerHTML = `<main class = 'main-div'>      
-</main>`;
-}
-
-
-document.addEventListener('click',function(e)
-{
-    if(e.target && e.target.id == 'add-car-btn')
+    main.innerHTML = `
+    <main class = 'main-div' id = 'main-div'>
+            <br>
+            <h1 id = 'welcome' class = 'welcome'>Welcome, Guest!</h1>
+            <br>
+            <div class ='welcome-div'>
+                <div>
+                    <img class = 'img' class = 'welcome-img' alt='book' src='./img/welcome.png'>
+                </div>
+                <div class = 'welcome-3'>
+                    adnuwqnunduwnundjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj wdqnuiuduwnquidu qnduiwnqun uidwq
+                </div>
+            </div>
+        </main>
+    `;
+    if (localStorage['loged'] == 'true')
     {
-        carName = document.getElementById("car_name").value;
-        price = document.getElementById("price").value;
-        imgLink = document.getElementById("Image").value;
-        carDesc = document.getElementById("car-desc").value;
-        obj = {
-            name: carName,
-            price: price,
-            description: carDesc,
-            img: imgLink
-        }
-        postCar(obj);
+        
     }
-});
-
-function postCar(postObject)
-{
-
-    fetch('http://localhost:3000/cars', {
-        method: 'post',
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify(postObject)
-    }).then(function () {
-        localStorage.setItem("onSearch", "false");
-        goSearchCars();
-    });
-
-
 }
+
+
+

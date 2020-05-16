@@ -6,14 +6,14 @@ X   aplicatia sa fie Single Page Application
 X   codul sursa (nearhivat) al proiectului trebuie sa fie salvat pe GitHub X
 X   nu puteti folosi librarii, framework-uri CSS sau JavaScript (cum ar fi jQuery, Bootstrap, Angular, React, etc) pentru realizarea frontend-ului X
 
-    Atentie! Orice proiect care nu respecta criteriile de acceptanta este evaluat la 0 puncte.
+    Atentie! Orice proiect booke nu respecta criteriile de acceptanta este evaluat la 0 puncte.
 
 Frontend (maxim 17 puncte)
 HTML si CSS (maxim 8 puncte)
 
 X    Fisiere separate pentru HTML si CSS (0.5 puncte)
 X(header, nav, main, section)    In interiorul documentelor HTML, sa se foloseasca minim 4 taguri semantice (1 punct)
-X    Stilurile CSS sa fie definite folosind clase direct pe elementele care trebuie stilizate (minim 80% din selectori) (0.5 punct)
+X    Stilurile CSS sa fie definite folosind clase direct pe elementele booke trebuie stilizate (minim 80% din selectori) (0.5 punct)
 X    Layout-ul sa fie impartit in minim 2 coloane si sa fie realizat cu Flexbox si/sau CSS grid (2 puncte)
 X    Site-ul sa fie responsive, respectand rezolutiile urmatoarelor dispozitive folosind media queries: (4 puncte)
 X        telefon mobil - latime mai mica 768px
@@ -35,7 +35,7 @@ Backend API (maxim 8 puncte)
 
 Punctaj subiectiv (maxim 5 puncte)
 
-Ne vom imagina ca aplicatia trebuie prezentata unui client, care va aprecia, de exemplu:
+Ne vom imagina ca aplicatia trebuie prezentata unui client, booke va aprecia, de exemplu:
 
     calitatea sustinerii prezentarii proiectului
     designul (sa arate placut si ingrijit)

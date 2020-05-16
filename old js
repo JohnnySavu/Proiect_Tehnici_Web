@@ -16,92 +16,92 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Create
-app.post("/cars", (req, res) => {
-  const carsList = readJSONFile();
-  const newCar = req.body;
-  newCar.id = uuidv1();
-  const newCarList = [...carsList, newCar];
-  writeJSONFile(newCarList);
-  res.json(newCar);
+app.post("/books", (req, res) => {
+  const booksList = readJSONFile();
+  const newbook = req.body;
+  newbook.id = uuidv1();
+  const newbookList = [...booksList, newbook];
+  writeJSONFile(newbookList);
+  res.json(newbook);
 });
 
 // Read One
-app.get("/cars/:id", (req, res) => {
-  const carsList = readJSONFile();
+app.get("/books/:id", (req, res) => {
+  const booksList = readJSONFile();
   const id = req.params.id;
   let idFound = false;
-  let foundCar;
+  let foundbook;
 
-  carsList.forEach(car => {
-    if (id === car.id) {
+  booksList.forEach(book => {
+    if (id === book.id) {
       idFound = true;
-      foundCar = car
+      foundbook = book
     }
   });
 
   if (idFound) {
-    res.json(foundCar);
+    res.json(foundbook);
   } else {
-    res.status(404).send(`Car ${id} was not found`);
+    res.status(404).send(`book ${id} was not found`);
   }
 });
 
 // Read All
-app.get("/cars", (req, res) => {
-  const carsList = readJSONFile();
-  res.json(carsList);
+app.get("/books", (req, res) => {
+  const booksList = readJSONFile();
+  res.json(booksList);
 });
 
 // Update
-app.put("/cars/:id", (req, res) => {
-  const carsList = readJSONFile();
+app.put("/books/:id", (req, res) => {
+  const booksList = readJSONFile();
   const id = req.params.id;
-  const newCar = req.body;
-  newCar.id = id;
+  const newbook = req.body;
+  newbook.id = id;
   idFound = false;
 
-  const newCarList = carsList.map((car) => {
-     if (car.id === id) {
+  const newbookList = booksList.map((book) => {
+     if (book.id === id) {
        idFound = true;
-       return newCar;
+       return newbook;
      }
-    return car;
+    return book;
   })
   
-  writeJSONFile(newCarList);
+  writeJSONFile(newbookList);
 
   if (idFound) {
-    res.json(newCar);
+    res.json(newbook);
   } else {
-    res.status(404).send(`Car ${id} was not found`);
+    res.status(404).send(`book ${id} was not found`);
   }
 
 });
 
 // Delete
-app.delete("/cars/:id", (req, res) => {
-  const carsList = readJSONFile();
+app.delete("/books/:id", (req, res) => {
+  const booksList = readJSONFile();
   const id = req.params.id;
-  const newCarList = carsList.filter((car) => car.id !== id)
+  const newbookList = booksList.filter((book) => book.id !== id)
 
-  if (carsList.length !== newCarList.length) {
-    res.status(200).send(`Car ${id} was removed`);
-    writeJSONFile(newCarList);
+  if (booksList.length !== newbookList.length) {
+    res.status(200).send(`book ${id} was removed`);
+    writeJSONFile(newbookList);
   } else {
-    res.status(404).send(`Car ${id} was not found`);
+    res.status(404).send(`book ${id} was not found`);
   }
 });
 
 // Functia de citire din fisierul db.json
 function readJSONFile() {
-  return JSON.parse(fs.readFileSync("db.json"))["cars"];
+  return JSON.parse(fs.readFileSync("db.json"))["books"];
 }
 
 // Functia de scriere in fisierul db.json
 function writeJSONFile(content) {
   fs.writeFileSync(
     "db.json",
-    JSON.stringify({ cars: content }),
+    JSON.stringify({ books: content }),
     "utf8",
     err => {
       if (err) {

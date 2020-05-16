@@ -5,80 +5,128 @@ const cors = require("cors");
 const uuidv1 = require('uuid/v1');
 
 const fs = require("fs");
-
+var admin = false;
+var loged = false;
 
 const app = express();
-
 
 app.use(morgan("tiny"));
 app.use(bodyParser.json());
 app.use(cors());
 
 
-app.post("/cars", (req, res) => {
-  const carsList = readJSONFile();
-  const newCar = req.body;
-  newCar.id = uuidv1();
-  const newCarList = [...carsList, newCar];
-  writeJSONFile(newCarList);
-  res.json(newCar);
+app.post("/books", (req, res) => {
+  const booksList = readJSONFile();
+  const newbook = req.body;
+  newbook.id = uuidv1();
+  const newbookList = [...booksList, newbook];
+  writeJSONFile(newbookList);
+  res.json(newbook);
 });
 
 
-app.get("/cars/:id", (req, res) => {
-  const carsList = readJSONFile();
+app.get("/books/:id", (req, res) => {
+  const booksList = readJSONFile();
   const id = req.params.id;
   let idFound = false;
-  let foundCar;
+  let foundbook;
 
-  carsList.forEach(car => {
-    if (id == car.id) {
+  booksList.forEach(book => {
+    if (id == book.id) {
       idFound = true;
-      foundCar = car
+      foundbook = book
     }
   });
 
   if (idFound) {
-    res.json(foundCar);
+    res.json(foundbook);
   } else {
-    res.status(404).send(`Car ${id} was not found`);
+    res.status(404).send(`book ${id} was not found`);
   }
 });
 
-
-app.get("/cars", (req, res) => {
-  const carsList = readJSONFile();
-  res.json(carsList);
+app.post("/sign-up", (req, res) => {
+  let signData = req.body;
+  const userList = readUsers();
+  const newUser = req.body;
+  newUser.id = uuidv1();
+  const newUserList = [...userList, newUser];
+  writeUsers(newUserList);
+  res.json(newUser);
 });
 
 
-app.put("/cars/:id", (req, res) => {
-  let carsList = readJSONFile();
+app.post("/login", (req, res) => {
+  admin = false;
+  loged = false;
+  let logData = req.body;
+  if (logData.username == 'admin' && logData.password == 'admin')
+  {
+    admin = true;
+    loged = true;
+  }
+  else{
+    let users = readUsers();
+    let found = 0;
+    for (let i = 0 ; i < users.length; i++)
+    {
+      if (logData.username == users[i].username && logData.password == users[i].password)
+        found = 1;
+    }
+    if (found == 1)
+      loged = true;
+    else 
+      loged = false;
+  }
+  res.json("ok");
+  console.log(admin);
+  console.log(loged);
+});
+
+app.get("/login2", (req, res) => {
+  if (admin == true)
+    res.json("admin");
+  else if (loged == true)
+    res.json("loged");
+  else
+    res.json("not loged");
+
+});
+
+
+app.get("/books", (req, res) => {
+  const booksList = readJSONFile();
+  res.json(booksList);
+});
+
+
+app.put("/books/:id", (req, res) => {
+  let booksList = readJSONFile();
   let id = req.params.id;
-  let newCar = req.body;
-  newCar.id = id;
+  let newbook = req.body;
+  newbook.id = id;
   idFound = false;
 
-  const newCarsList = carsList.map((car) => {
-     if (car.id == id) {
+  const newbooksList = booksList.map((book) => {
+     if (book.id == id) {
        idFound = true;
-       return newCar
+       return newbook
      }
-    return car
+    return book
   })
   
-  writeJSONFile(newCarsList);
+  writeJSONFile(newbooksList);
 
   if (idFound) {
-    res.json(newCar);
+    res.json(newbook);
   } else {
-    res.status(404).send(`Car ${id} was not found`);
+    res.status(404).send(`book ${id} was not found`);
   }
 
 });
 
 
-app.delete("/cars/:id", (req, res) => {
+app.delete("/books/:id", (req, res) => {
     const dogsList = readJSONFile();
     const id = req.params.id;
     const newDogsList = dogsList.filter((dog) => dog.id != id)
@@ -93,14 +141,18 @@ app.delete("/cars/:id", (req, res) => {
 
 
 function readJSONFile() {
-  return JSON.parse(fs.readFileSync("db.json"))["cars"];
+  return JSON.parse(fs.readFileSync("db.json"))["books"];
+}
+
+function readUsers() {
+  return JSON.parse(fs.readFileSync("db.json"))["users"];
 }
 
 
 function writeJSONFile(content) {
   fs.writeFileSync(
     "db.json",
-    JSON.stringify({ cars: content }),
+    JSON.stringify({ books: content, users : readUsers() }),
     "utf8",
     err => {
       if (err) {
@@ -109,6 +161,21 @@ function writeJSONFile(content) {
     }
   );
 }
+
+function writeUsers(content) {
+  fs.writeFileSync(
+    "db.json",
+    JSON.stringify({ books : readJSONFile(),users: content }),
+    "utf8",
+    err => {
+      if (err) {
+        console.log(err);
+      }
+    }
+  );
+}
+
+app.use(express.static('assets'));
 
 // Pornim server-ul
 app.listen("3000", () =>
