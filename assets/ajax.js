@@ -39,27 +39,3 @@ function postbook(postObject)
     });
 
 }
-
-
-
-
-
-/*
-
-var addbookBtn = null;
-if (document.getElementById('main-div'))
-{
-    console.log("binie");
-    addbookBtn = document.getElementById('main-div');
-    addbookBtn.addEventListener('click', works);
-}
-else
-{
-    addbookBtn = null;
-}
-
-function works()
-{
-    console.log("binie");
-}
-*/

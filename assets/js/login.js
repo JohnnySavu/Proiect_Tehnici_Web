@@ -1,10 +1,8 @@
 
-console.log("pap lapte");
 document.addEventListener('click',function(e)
 {
     if(e.target && e.target.id == 'submit-log-in')
     {
-        console.log("so far so good");
         let obj = {
             username : document.getElementById("username").value,
             password: document.getElementById("password").value
@@ -16,14 +14,11 @@ document.addEventListener('click',function(e)
         },
         body: JSON.stringify(obj)
         }).then(function (response) {
-            console.log("aici");
             fetch('http://localhost:3000/login2')
             .then(function (response) { 
                 response.json().then(function (res) {
-            console.log(res);
             if (res == "admin")
             {
-                console.log('dadadadada');
                 document.getElementById("navigator").innerHTML = `
                 <button type='button' class='nav-button' id='home-btn'> Home </button>
                 <button type='button' class='nav-button' id = 'search-books-btn'> Search books </button>
@@ -122,7 +117,7 @@ function goHome(){
                     <img class = 'img' class = 'welcome-img' alt='book' src='./img/welcome.png'>
                 </div>
                 <div class = 'welcome-3'>
-                    adnuwqnunduwnundjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj wdqnuiuduwnquidu qnduiwnqun uidwq
+                Our website is dedicated to literature lovers. Whether you would like to buy or sell books, this is the right place to be! Save money or share your passion in an instant: just register and you'll be taken on a whole new dimension: a world full of stories!
                 </div>
             </div>
         </main>

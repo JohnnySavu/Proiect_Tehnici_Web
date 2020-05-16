@@ -83,10 +83,3 @@ function postbook(postObject)
 
 }
 
-
-function goHome(){
-    localStorage.setItem("onSearch", "false");
-    main = document.getElementById('main-section');
-    main.innerHTML = `<main class = 'main-div'>      
-</main>`;
-}

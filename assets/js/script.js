@@ -79,7 +79,6 @@ function modifyItem(book)
             img:document.getElementById("Image").value,
             id:book.id
         }
-        console.log(book.id);
         fetch(`http://localhost:3000/books/${book.id}`, {
             method: 'PUT',
             headers: {
@@ -95,7 +94,6 @@ function modifyItem(book)
     //aici sterg elementul
     document.getElementById("delete-book-btn").addEventListener('click',function()
     {
-        console.log(book.id);
         fetch(`http://localhost:3000/books/${book.id}`, {
         method: 'DELETE',
     }).then(function () {
@@ -238,7 +236,7 @@ function goSearchbooks(){
     //if we try to reload the list but there is no need to, abort
     if(localStorage.getItem("onSearch") == 'true')
     {
-        console.log(localStorage.getItem("onSearch"));
+        //console.log(localStorage.getItem("onSearch"));
         return;
     }
     localStorage.setItem("onSearch",'true');
@@ -331,7 +329,7 @@ function goHome(){
                     <img class = 'img' class = 'welcome-img' alt='book' src='./img/welcome.png'>
                 </div>
                 <div class = 'welcome-3'>
-                    adnuwqnunduwnundjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj wdqnuiuduwnquidu qnduiwnqun uidwq
+                Our website is dedicated to literature lovers. Whether you would like to buy or sell books, this is the right place to be! Save money or share your passion in an instant: just register and you'll be taken on a whole new dimension: a world full of stories!
                 </div>
             </div>
         </main>

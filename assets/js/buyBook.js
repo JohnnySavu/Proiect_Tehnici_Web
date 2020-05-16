@@ -50,12 +50,10 @@ function buybooks(book)
     document.getElementById("price").value = book.price;
     document.getElementById('book_desc').value = book.description;
     document.getElementById("buy-now-book-btn").addEventListener('click', function(){
-        console.log(book.id);
+  
         fetch(`http://localhost:3000/books/${book.id}`, {
         method: 'DELETE',
         }).then(function () {
-            console.log("Booooob is love, bob is life");
-        //console.log(response);
         showThanks();
     }); 
     });

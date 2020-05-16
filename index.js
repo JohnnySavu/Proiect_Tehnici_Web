@@ -79,8 +79,7 @@ app.post("/login", (req, res) => {
       loged = false;
   }
   res.json("ok");
-  console.log(admin);
-  console.log(loged);
+
 });
 
 app.get("/login2", (req, res) => {
