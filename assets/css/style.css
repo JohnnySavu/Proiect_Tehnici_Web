@@ -23,7 +23,7 @@ header{
 }
 
 .black-logo{
-    color : #c44141;
+    color : #fff;
 }
 
 .nav-bar{
@@ -31,10 +31,12 @@ header{
 }
 
 .navigator{
+    color:#0f0f3d;
     align-items:right;
 }
 
 .main-section{
+    color:#0f0f3d;
     height: 100%;
     display:grid;
     grid-template-columns: 150px 1fr 150px;
@@ -132,10 +134,17 @@ header{
 }
 
 .titlu{
+    font-size: 24px;
     word-wrap: break-word;
 }
 
+.titlu-pret{
+    align-self: center;
+    margin-bottom: 10px;
+}
+
 .pret{
+    font-size: 18px;
     word-wrap: break-word;
 }
 
@@ -147,7 +156,7 @@ header{
 
 .descriere{
     margin:3px;
-    font-size: 22px;
+    font-size: 20px;
     overflow:auto;
 }
 
@@ -165,6 +174,10 @@ header{
     vertical-align:middle;
 }
 
+form{
+    align-self: center;
+}
+
 .img{
     max-width:95%;
     max-height:100%;
@@ -172,7 +185,7 @@ header{
 }
 
 .titlu{
-    font-size:28px;
+    font-size:24px;
     font-weight: bold;
     margin-top:10px;
     margin-bottom:5px;
@@ -187,6 +200,7 @@ header{
 @media only screen and (min-width: 769px) and (max-width: 1280px) {
     /* For tablets: */
     .main-section{
+        color:#0f0f3d;
         height: 100%;
         display:grid;
         grid-template-columns: 80px 1fr 80px;
@@ -227,6 +241,7 @@ header{
         background-color:rgb(241, 250, 238, 0.8);
     }
     .main-section{
+        color:#0f0f3d;
         height: 100%;
         display:grid;
         grid-template-columns: 50px 1fr 50px;
@@ -291,6 +306,7 @@ header{
     width:99%;
     opacity:0.6;
     height:auto;
+    font-size:18px;
 }
 
 .btn-buy{
@@ -309,7 +325,7 @@ header{
 
 .welcome
 {
-    font-size : 60px;
+    font-size : 50px;
 }
 
 .welcome-div{
@@ -325,4 +341,20 @@ header{
 {
     overflow:auto;
     align-self: center;
+}
+
+input[type = text]{
+    color:#0f0f3d;
+}
+
+input[type = text]:disabled{
+    color:#0f0f3d;
+}
+
+textarea{
+    color:#0f0f3d;
+}
+
+textarea :disabled{
+    color:#0f0f3d;
 }

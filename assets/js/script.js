@@ -251,12 +251,10 @@ function goSearchbooks(){
     main_div.className = "main-div-search";
     main_div.id = "main-div-search";
     
-    //let main = document.getElementById('main-div-search');
-    //while(main.firstChild)
-        //main.removeChild(main.firstChild);
+
     fetch('http://localhost:3000/books')
     .then(function (response) {
-        // Trasform server response to get the dogs
+        
         response.json().then(function (books) {
             for(let i = 0; i < books.length; i++)
             {
@@ -318,40 +316,9 @@ function goSearchbooks(){
     });
 
     mainSection.appendChild(main_div);
-/*
-
-    mainSection.innerHTML = `<main class = 'main-div-search' id = 'main-div-search'>
-    <div id = '1' class='book'>
-                <div class = 'poza-titlu'>
-                    <div class ='desc-produs'>
-                        <img class = 'img' alt='book'  src='./img/book1.jpg'>
-                    </div>
-                    <div class = 'tilu-pret'>
-                        <h3 class='titlu'>
-                            BMW 320d
-                        </h3>
-                        <h4 class='pret'>
-                            3.200$
-                        </h4>
-                    </div>
-                </div>
-
-                <div class = 'descriere'>
-                   Descriere: lorem ipsum
-                </div>
-                
-                <button type='button' class='btn-buy'>
-                    Buy it!
-                </button>
-    </div>
-
-
-</main>`;
-*/
 }
 
 function goHome(){
-    console.log("ayy");
     localStorage.setItem("onSearch", "false");
     main = document.getElementById('main-section');
     main.innerHTML = `
