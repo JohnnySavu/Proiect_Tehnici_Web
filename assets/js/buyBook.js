@@ -119,7 +119,10 @@ function showThanks()
             <div class ='welcome-div'>
                 <div>
                     <img class = 'img' class = 'welcome-img' alt='book' src='./img/welcome.png'>
-                </div>
+                    <br>
+                    <br>
+                    <br>                
+                    </div>
                 <div class = 'welcome-3'>
                     You will soon recive an email about your command. Meanwhile, you can browse our site for more great books!
                 </div>

@@ -358,3 +358,17 @@ textarea{
 textarea :disabled{
     color:#0f0f3d;
 }
+
+body{
+    display:grid;
+    grid-template-rows: 5% fit-content(1fr) 100px;
+}
+
+footer{
+    justify-self:center;
+    text-align: center;
+    background-color: rgb(241, 250, 238, 0.6); 
+    width:82%;
+    border-radius:12px;
+    margin-bottom: 15px;
+}
